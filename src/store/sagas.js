@@ -1,23 +1,33 @@
-import { all, call, put, takeLatest } from "redux-saga/effects";
-import { getRouteFromAPI } from "../services/osrmAPI";
-import { selectRoute, setRoutes, setError } from "./actions";
+import { all, call, put, takeLatest, select } from 'redux-saga/effects';
+import { getRouteFromAPI } from '../services/osrmAPI';
+import { fetchRouteSagaAction, setRoutes, setError } from './actions';
 
-// Worker Saga: will be fired on SELECT_ROUTE actions
-function* fetchRoute(action) {
+// Worker Saga: will be fired on FETCH_ROUTE_SAGA_ACTION actions
+function* fetchRouteSaga(action) {
     try {
-        const route = yield call(getRouteFromAPI, action.payload);
-        yield put(setRoutes(route));
+        const route = action.payload;
+        const coordinates = route.waypoints.map((waypoint) => waypoint.location);
+        const newCoordinates = yield call(getRouteFromAPI, coordinates);
+
+        // Replace old polyline with new polyline from OSRM
+        const newRoute = {
+            ...route,
+            polyline: newCoordinates,
+        };
+
+        // Find and replace route in routes array
+        const routes = yield select((state) => state.route.routes);
+        const newRoutes = routes.map((route) =>
+            route.name === newRoute.name ? newRoute : route
+        );
+        yield put(setRoutes(newRoutes));
     } catch (e) {
         yield put(setError(e.message));
     }
 }
 
-/*
-  Starts fetchRoute on each dispatched `SELECT_ROUTE` action.
-  Allows concurrent fetches of route.
-*/
-function* mySaga() {
-    yield all([takeLatest(selectRoute.type, fetchRoute)]);
+function* rootSaga() {
+    yield all([takeLatest(fetchRouteSagaAction.type, fetchRouteSaga)]);
 }
 
-export default mySaga;
+export default rootSaga;

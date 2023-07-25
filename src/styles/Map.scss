@@ -1,0 +1,19 @@
+.map-container {
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+
+.leaflet-container {
+    height: 100%;
+    width: 100%;
+}
+
+.route-marker {
+    color: #f00;
+    fill: #f00;
+}
+
+.route-polyline {
+    color: #00f;
+}

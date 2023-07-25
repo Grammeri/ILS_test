@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@mapbox/polyline": "^1.2.0",
+    "@react-buddy/ide-toolbox": "^2.4.0",
+    "@react-buddy/palette-antd": "^5.3.0",
     "@reduxjs/toolkit": "^1.9.5",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^13.0.0",
@@ -10,6 +13,7 @@
     "antd": "^5.7.3",
     "axios": "^1.4.0",
     "leaflet": "^1.9.4",
+    "leaflet-routing-machine": "^3.2.12",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-leaflet": "^4.2.1",
@@ -17,6 +21,7 @@
     "react-scripts": "5.0.1",
     "redux": "^4.2.1",
     "redux-saga": "^1.2.3",
+    "sass": "^1.64.1",
     "web-vitals": "^2.1.0"
   },
   "scripts": {
@@ -25,6 +30,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "proxy": "http://router.project-osrm.org/",
   "eslintConfig": {
     "extends": [
       "react-app",

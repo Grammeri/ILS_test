@@ -1,0 +1,6 @@
+/* RouteList.css */
+.selected-row {
+    background-color: #f0f0f0;
+    font-weight: bold; /* You can add additional styles to make the highlighting more apparent */
+    color: #000;
+}
