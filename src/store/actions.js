@@ -12,6 +12,9 @@ export const routeSlice = createSlice({
                     { location: [59.82934196, 30.42423701] },
                     { location: [59.83567701, 30.38064206] },
                 ],
+                polyline: {
+                    coordinates: []
+                }
             },
             {
                 name: "Маршрут №2",
@@ -20,6 +23,9 @@ export const routeSlice = createSlice({
                     { location: [59.82761295, 30.41705607] },
                     { location: [59.84660399, 30.29496392] },
                 ],
+                polyline: {
+                    coordinates: []
+                }
             },
             {
                 name: "Маршрут №3",
@@ -28,9 +34,22 @@ export const routeSlice = createSlice({
                     { location: [59.84660399, 30.29496392] },
                     { location: [59.82761295, 30.41705607] },
                 ],
+                polyline: {
+                    coordinates: []
+                }
             },
         ],
-        selectedRoute: null,
+        selectedRoute: {
+            name: "Маршрут №1",
+            waypoints: [
+                { location: [59.84660399, 30.29496392] },
+                { location: [59.82934196, 30.42423701] },
+                { location: [59.83567701, 30.38064206] },
+            ],
+            polyline: {
+                coordinates: []
+            }
+        },
         error: null,
     },
     reducers: {

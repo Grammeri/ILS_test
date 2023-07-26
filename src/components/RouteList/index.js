@@ -9,6 +9,7 @@ const RouteList = () => {
     const { routes, selectedRoute } = useSelector((state) => state.route);
 
     useEffect(() => {
+
         if (selectedRoute) {
             dispatch(fetchRouteSagaAction(selectedRoute));
         }

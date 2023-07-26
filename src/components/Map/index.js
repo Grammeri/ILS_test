@@ -6,7 +6,7 @@ import 'leaflet/dist/leaflet.css';
 const MapComponent = () => {
     const selectedRoute = useSelector(state => state.route.selectedRoute);
    /* if (!selectedRoute) return null;*/
-    console.log(selectedRoute)
+    //console.log(selectedRoute)
     const { name, waypoints } = selectedRoute;
 
     const routeMarkers = waypoints.map((point, idx) => (

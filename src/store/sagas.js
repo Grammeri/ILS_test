@@ -9,13 +9,11 @@ function* fetchRouteSaga(action) {
         const coordinates = route.waypoints.map((waypoint) => waypoint.location);
         const newCoordinates = yield call(getRouteFromAPI, coordinates);
 
-        // Replace old polyline with new polyline from OSRM
         const newRoute = {
             ...route,
             polyline: newCoordinates,
         };
 
-        // Find and replace route in routes array
         const routes = yield select((state) => state.route.routes);
         const newRoutes = routes.map((route) =>
             route.name === newRoute.name ? newRoute : route
