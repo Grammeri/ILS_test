@@ -1,4 +1,3 @@
-// We can use Redux Toolkit for generating actions and reducers
 import { createSlice, createAction } from "@reduxjs/toolkit";
 
 export const routeSlice = createSlice({
@@ -39,18 +38,9 @@ export const routeSlice = createSlice({
                 }
             },
         ],
-        selectedRoute: {
-            name: "Маршрут №1",
-            waypoints: [
-                { location: [59.84660399, 30.29496392] },
-                { location: [59.82934196, 30.42423701] },
-                { location: [59.83567701, 30.38064206] },
-            ],
-            polyline: {
-                coordinates: []
-            }
-        },
+        selectedRoute: null,
         error: null,
+        loading: false,
     },
     reducers: {
         setRoutes: (state, action) => {
@@ -62,14 +52,17 @@ export const routeSlice = createSlice({
         setError: (state, action) => {
             state.error = action.payload;
         },
+        startLoading: (state) => {
+            state.loading = true;
+        },
+        finishLoading: (state) => {
+            state.loading = false;
+        },
     },
 });
 
-// Export actions
-export const { setRoutes, selectRoute, setError } = routeSlice.actions;
+export const { setRoutes, selectRoute, setError, startLoading, finishLoading } = routeSlice.actions;
 
-// Create and export fetchRouteSagaAction
 export const fetchRouteSagaAction = createAction('ROUTE/FETCH');
 
-// Export reducer
 export default routeSlice.reducer;

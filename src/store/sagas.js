@@ -1,10 +1,10 @@
 import { all, call, put, takeLatest, select } from 'redux-saga/effects';
 import { getRouteFromAPI } from '../services/osrmAPI';
-import { fetchRouteSagaAction, setRoutes, setError } from './actions';
+import { fetchRouteSagaAction, setRoutes, setError, startLoading, finishLoading } from '../store/actions';
 
-// Worker Saga: will be fired on FETCH_ROUTE_SAGA_ACTION actions
 function* fetchRouteSaga(action) {
     try {
+        yield put(startLoading()); // Начало загрузки
         const route = action.payload;
         const coordinates = route.waypoints.map((waypoint) => waypoint.location);
         const newCoordinates = yield call(getRouteFromAPI, coordinates);
@@ -21,6 +21,8 @@ function* fetchRouteSaga(action) {
         yield put(setRoutes(newRoutes));
     } catch (e) {
         yield put(setError(e.message));
+    } finally {
+        yield put(finishLoading()); // Завершение загрузки
     }
 }
 

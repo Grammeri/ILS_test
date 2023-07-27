@@ -1,9 +1,7 @@
 import Icon from "../../src/assets/marker-icon-2x.png"
-import polyline from '@mapbox/polyline';
 import L from 'leaflet';
-
-
-// Настройки иконки маркера
+import { useEffect } from 'react';
+import { useMap } from 'react-leaflet';
 
 
 export let myIcon = L.icon({
@@ -15,33 +13,35 @@ export let myIcon = L.icon({
 });
 
 
-// Настройки полилинии
 export const polylineOptions = {
     color: 'red',
     weight: 3,
     opacity: 0.5,
 };
 
-// Функция для преобразования координат в строку, которую можно использовать в запросе к OSRM API
-/*export const coordinatesToString = (coordinates) => {
-    return coordinates.map(coordinate => coordinate.join(',')).join(';');
-}*/
+export function ChangeView({ center, zoom }) {
+    const map = useMap();
+    useEffect(() => {
+        map.setView(center, zoom);
+    }, [center, zoom, map]);
+    return null;
+}
 
-// Функция для преобразования строки ответа OSRM API в массив координат
-/*export const decodePolyline = (polylineData) => {
-    let decodedData = polyline.decode(polylineData);
+export function getCenter(coordinates) {
+    if (!coordinates || !coordinates.length) {
+        return [59.84, 30.35]; // Default center
+    }
 
-    // Инвертирование координат, так как Leaflet использует порядок (широта, долгота)
-    return decodedData.map(item => item.reverse());
-}*/
+    let minLat = coordinates[0][0], maxLat = coordinates[0][0];
+    let minLng = coordinates[0][1], maxLng = coordinates[0][1];
 
-// Функция для определения области видимости карты, чтобы отобразить все маркеры
-/*export const getBounds = (coordinates) => {
-    let latitudes = coordinates.map(coordinate => coordinate[0]);
-    let longitudes = coordinates.map(coordinate => coordinate[1]);
+    for (let i = 1; i < coordinates.length; i++) {
+        const [lat, lng] = coordinates[i];
+        minLat = lat < minLat ? lat : minLat;
+        maxLat = lat > maxLat ? lat : maxLat;
+        minLng = lng < minLng ? lng : minLng;
+        maxLng = lng > maxLng ? lng : maxLng;
+    }
 
-    return [
-        [Math.min(...latitudes), Math.min(...longitudes)], // юго-западный угол
-        [Math.max(...latitudes), Math.max(...longitudes)]  // северо-восточный угол
-    ];
-}*/
+    return [(minLat + maxLat) / 2, (minLng + maxLng) / 2];
+}

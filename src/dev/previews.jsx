@@ -9,4 +9,4 @@ const ComponentPreviews = () => {
     )
 }
 
-export default ComponentPreviews
+export default ComponentPreviews/**/

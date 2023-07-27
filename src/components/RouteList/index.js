@@ -1,12 +1,12 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Table } from 'antd';
-import { fetchRouteSagaAction, selectRoute } from '../../store/actions';
+import React, {useEffect} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import {Table} from 'antd';
+import {fetchRouteSagaAction, selectRoute} from '../../store/actions';
 import './index.css'; // Import CSS for styling
 
 const RouteList = () => {
     const dispatch = useDispatch();
-    const { routes, selectedRoute } = useSelector((state) => state.route);
+    const {routes, selectedRoute} = useSelector((state) => state.route);
 
     useEffect(() => {
 

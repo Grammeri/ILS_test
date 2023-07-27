@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  position: relative;
 }
 
 .App-logo {
@@ -7,12 +8,18 @@
   pointer-events: none;
 }
 
-
 .leaflet-container .leaflet-marker-icon {
   background-image: url(~leaflet/dist/images/marker-icon.png);
 }
+
 .leaflet-container .leaflet-marker-shadow {
   background-image: url(~leaflet/dist/images/marker-shadow.png);
 }
 
-
+.app__spinner-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+}
