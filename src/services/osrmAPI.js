@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_ROOT = 'http://router.project-osrm.org/trip/v1/car/';
+const API_ROOT = 'https://router.project-osrm.org/trip/v1/car/';
 
 export const getRouteFromAPI = async coordinates => {
     const formattedCoordinates = coordinates.map(c => {
