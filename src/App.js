@@ -20,7 +20,8 @@ function App() {
   const { waypoints = [], polyline = {} } = selectedRoute || {};
   const { coordinates = [] } = polyline;
 
-  const center = getCenter(coordinates);
+  console.log(selectedRoute)
+  const center = getCenter(polyline);
 
   return (
       <Layout className="app">
@@ -42,7 +43,7 @@ function App() {
                 {coordinates.map((point, index) => (
                     <Marker key={index} position={point} icon={myIcon} />
                 ))}
-                <Polyline positions={coordinates} {...polylineOptions} />
+                <Polyline positions={polyline} {...polylineOptions} />
               </MapContainer>
             </Col>
           </Row>
